@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension xmlns="http://ns.adobe.com/air/extension/19.0">
+    <id>com.tuarua.AIRNativeANE</id>
+    <name>AIRNative ANE</name>
+    <copyright>This work is licensed under MIT License, Copyright (c) 2017 Tua Rua Ltd.</copyright>
+    <versionNumber>0.0.1</versionNumber>
+	<platforms>
+        <platform name="Windows-x86">
+            <applicationDeployment>
+                <nativeLibrary>AIRNativeANE.dll</nativeLibrary>
+                <initializer>TRANExtInizer</initializer>
+                <finalizer>TRANExtFinizer</finalizer>
+            </applicationDeployment>
+        </platform>
+	</platforms>
+</extension>

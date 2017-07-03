@@ -1,0 +1,117 @@
+<?xml version="1.0" ?>
+<swc xmlns="http://www.adobe.com/flash/swccatalog/9">
+    <versions>
+        <swc version="1.2"/>
+        <compiler name="ActionScript Compiler" version="2.0.0" build="354203"/>
+    </versions>
+    <features>
+        <feature-script-deps/>
+    </features>
+    <libraries>
+        <library path="library.swf">
+            <script name="com/tuarua/AIRNativeANE" mod="1499105161209">
+                <def id="com.tuarua:AIRNativeANE"/>
+                <dep id="com.tuarua.fre:ANContext" type="e"/>
+                <dep id="flash.events:EventDispatcher" type="i"/>
+            </script>
+            <script name="com/tuarua/fre/ANContext" mod="1499105145287">
+                <def id="com.tuarua.fre:ANContext"/>
+                <dep id="Error" type="e"/>
+                <dep id="Function" type="s"/>
+                <dep id="Object" type="i"/>
+                <dep id="String" type="s"/>
+                <dep id="flash.events:StatusEvent" type="s"/>
+                <dep id="flash.external:ExtensionContext" type="s"/>
+                <dep id="trace" type="e"/>
+            </script>
+            <script name="com/tuarua/fre/ANEError" mod="1498404462828">
+                <def id="com.tuarua.fre:ANEError"/>
+                <dep id="Array" type="s"/>
+                <dep id="Error" type="i"/>
+                <dep id="String" type="s"/>
+                <dep id="flash.system:Capabilities" type="e"/>
+                <dep id="int" type="s"/>
+            </script>
+            <script name="com/tuarua/fre/ANEUtils" mod="1497137651189">
+                <def id="com.tuarua.fre:ANEUtils"/>
+                <dep id="Object" type="i"/>
+                <dep id="String" type="s"/>
+                <dep id="XML" type="e"/>
+                <dep id="__AS3__.vec:Vector" type="e"/>
+                <dep id="flash.utils:describeType" type="e"/>
+            </script>
+            <script name="com/tuarua/fre/ANStage" mod="1499105058013">
+                <def id="com.tuarua.fre:ANStage"/>
+                <dep id="Boolean" type="s"/>
+                <dep id="Error" type="s"/>
+                <dep id="Function" type="s"/>
+                <dep id="Object" type="i"/>
+                <dep id="String" type="s"/>
+                <dep id="com.tuarua.fre:ANContext" type="e"/>
+                <dep id="com.tuarua.fre.display:ANDisplayObject" type="s"/>
+                <dep id="flash.desktop:NativeApplication" type="e"/>
+                <dep id="flash.display:Stage" type="s"/>
+                <dep id="flash.events:Event" type="s"/>
+                <dep id="flash.events:FullScreenEvent" type="s"/>
+                <dep id="flash.events:NativeWindowDisplayStateEvent" type="s"/>
+                <dep id="flash.geom:Rectangle" type="s"/>
+                <dep id="trace" type="e"/>
+                <dep id="uint" type="s"/>
+            </script>
+            <script name="com/tuarua/fre/display/ANButton" mod="1499105058079">
+                <def id="com.tuarua.fre.display:ANButton"/>
+                <dep id="Error" type="s"/>
+                <dep id="Function" type="s"/>
+                <dep id="JSON" type="e"/>
+                <dep id="Object" type="e"/>
+                <dep id="String" type="s"/>
+                <dep id="__AS3__.vec:Vector" type="s"/>
+                <dep id="com.tuarua.fre:ANContext" type="e"/>
+                <dep id="com.tuarua.fre.display:ANDisplayObject" type="i"/>
+                <dep id="flash.display:Bitmap" type="s"/>
+                <dep id="flash.display:BitmapData" type="s"/>
+                <dep id="flash.events:MouseEvent" type="e"/>
+                <dep id="flash.events:StatusEvent" type="s"/>
+                <dep id="trace" type="e"/>
+            </script>
+            <script name="com/tuarua/fre/display/ANDisplayObject" mod="1499105058044">
+                <def id="com.tuarua.fre.display:ANDisplayObject"/>
+                <dep id="Boolean" type="s"/>
+                <dep id="Error" type="s"/>
+                <dep id="Number" type="s"/>
+                <dep id="Object" type="i"/>
+                <dep id="String" type="s"/>
+                <dep id="com.tuarua.fre:ANContext" type="e"/>
+                <dep id="com.tuarua.utils:GUID" type="e"/>
+                <dep id="int" type="s"/>
+                <dep id="trace" type="e"/>
+            </script>
+            <script name="com/tuarua/fre/display/ANImage" mod="1499018613644">
+                <def id="com.tuarua.fre.display:ANImage"/>
+                <dep id="com.tuarua.fre.display:ANDisplayObject" type="i"/>
+                <dep id="flash.display:Bitmap" type="s"/>
+                <dep id="flash.display:BitmapData" type="s"/>
+            </script>
+            <script name="com/tuarua/fre/display/ANSprite" mod="1499105058115">
+                <def id="com.tuarua.fre.display:ANSprite"/>
+                <dep id="Error" type="s"/>
+                <dep id="com.tuarua.fre:ANContext" type="e"/>
+                <dep id="com.tuarua.fre.display:ANDisplayObject" type="i"/>
+                <dep id="trace" type="e"/>
+            </script>
+            <script name="com/tuarua/utils/GUID" mod="1495923976543">
+                <def id="com.tuarua.utils:GUID"/>
+                <dep id="Array" type="s"/>
+                <dep id="Date" type="e"/>
+                <dep id="Math" type="e"/>
+                <dep id="Number" type="s"/>
+                <dep id="String" type="s"/>
+                <dep id="flash.display:Sprite" type="i"/>
+                <dep id="flash.system:Capabilities" type="e"/>
+            </script>
+            <digests>
+                <digest type="SHA-256" signed="false" value="25990158483669e75abe979804f864908663776667f05c873cca37d6344f7eb8"/>
+            </digests>
+        </library>
+    </libraries>
+</swc>
