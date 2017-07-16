@@ -1,7 +1,7 @@
 #pragma once
 #include "FlashRuntimeExtensions.h"
 extern "C" {
-	__declspec(dllexport) void TRANExtInizer(void** extData, FREContextInitializer* ctxInitializer, FREContextFinalizer* ctxFinalizer);
-	__declspec(dllexport) void TRANExtFinizer(void* extData);
+	__declspec(dllexport) EXTENSION_INIT_DECL(TRAN);
+	__declspec(dllexport) EXTENSION_FIN_DECL(TRAN);
 }
 

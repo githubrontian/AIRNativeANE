@@ -3,9 +3,16 @@
     <id>com.tuarua.AIRNativeANE</id>
     <name>AIRNative ANE</name>
     <copyright>This work is licensed under MIT License, Copyright (c) 2017 Tua Rua Ltd.</copyright>
-    <versionNumber>0.0.1</versionNumber>
+    <versionNumber>0.0.2</versionNumber>
 	<platforms>
         <platform name="Windows-x86">
+            <applicationDeployment>
+                <nativeLibrary>AIRNativeANE.dll</nativeLibrary>
+                <initializer>TRANExtInizer</initializer>
+                <finalizer>TRANExtFinizer</finalizer>
+            </applicationDeployment>
+        </platform>
+        <platform name="Windows-x86-64">
             <applicationDeployment>
                 <nativeLibrary>AIRNativeANE.dll</nativeLibrary>
                 <initializer>TRANExtInizer</initializer>

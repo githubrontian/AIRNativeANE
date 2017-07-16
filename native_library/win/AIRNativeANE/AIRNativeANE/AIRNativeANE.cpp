@@ -1,3 +1,4 @@
+#include "FreSharpMacros.h"
 #include "AIRNativeANE.h"
 #include "FlashRuntimeExtensions.h"
 #include "stdafx.h"
@@ -17,43 +18,28 @@ extern "C" {
 		return true;
 	}
 
-	void contextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctionsToSet, const FRENamedFunction** functionsToSet) {
+	CONTEXT_INIT(TRAN) {
 
-		FreSharpBridge::InitController();
-		FreSharpBridge::SetFREContext(ctx);
-		FreSharpBridge::GetFunctions();
-
-		//TODO how to pass functionData without losing the string reference
+		FREBRIDGE_INIT
 
 		static FRENamedFunction extensionFunctions[] = {
-			{ (const uint8_t *) "initNativeStage","initNativeStage", &callSharpFunction }
-			,{ (const uint8_t *) "addNativeStage","addNativeStage", &callSharpFunction }
-			,{ (const uint8_t *) "updateNativeStage","updateNativeStage", &callSharpFunction }
-			,{ (const uint8_t *) "addNativeChild","addNativeChild", &callSharpFunction }
-			,{ (const uint8_t *) "updateNativeChild","updateNativeChild", &callSharpFunction }
-			,{ (const uint8_t *) "fullscreenNativeStage","fullscreenNativeStage", &callSharpFunction }
-			,{ (const uint8_t *) "restoreNativeStage","restoreNativeStage", &callSharpFunction }
-			//
-			
+			 MAP_FUNCTION(initNativeStage)
+			,MAP_FUNCTION(addNativeStage)
+			,MAP_FUNCTION(updateNativeStage)
+			,MAP_FUNCTION(addNativeChild)
+			,MAP_FUNCTION(updateNativeChild)
+			,MAP_FUNCTION(fullscreenNativeStage)
+			,MAP_FUNCTION(restoreNativeStage)
 		};
 
-		*numFunctionsToSet = sizeof(extensionFunctions) / sizeof(FRENamedFunction);
-		*functionsToSet = extensionFunctions;
+		SET_FUNCTIONS
 
 	}
 
-	void contextFinalizer(FREContext ctx) {
-		return;
+	CONTEXT_FIN(TRAN) {
 	}
 
-	void TRANExtInizer(void** extData, FREContextInitializer* ctxInitializer, FREContextFinalizer* ctxFinalizer) {
-		*ctxInitializer = &contextInitializer;
-		*ctxFinalizer = &contextFinalizer;
-	}
+	EXTENSION_INIT(TRAN)
 
-	void TRANExtFinizer(void* extData) {
-		FREContext nullCTX = 0;
-		contextFinalizer(nullCTX);
-		return;
-	}
+	EXTENSION_FIN(TRAN)
 }
