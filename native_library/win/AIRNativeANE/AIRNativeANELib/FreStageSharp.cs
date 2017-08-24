@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Interop;
 using System.Windows.Media;
 using TuaRua.FreSharp;
@@ -9,12 +8,14 @@ using Hwnd = System.IntPtr;
 using FREObject = System.IntPtr;
 using FREContext = System.IntPtr;
 using Color = System.Windows.Media.Color;
+using System.Windows;
+
 namespace TuaRua.AIRNative {
     /// <summary>
     /// 
     /// </summary>
     public class FreStageSharp {
-        private static Rectangle _viewPort;
+        private static Rect _viewPort;
         private static bool _visible;
 
         /// <summary>
@@ -83,8 +84,8 @@ namespace TuaRua.AIRNative {
                 System.Diagnostics.Process.GetCurrentProcess().MainWindowHandle; //get the reference to the AIR Window
 
             _parameters = new HwndSourceParameters();
-            _parameters.SetPosition(_viewPort.X, _viewPort.Y);
-            _parameters.SetSize(_viewPort.Width, _viewPort.Height);
+            _parameters.SetPosition(Convert.ToInt32(_viewPort.X), Convert.ToInt32(_viewPort.Y));
+            _parameters.SetSize(Convert.ToInt32(_viewPort.Width), Convert.ToInt32(_viewPort.Height));
             _parameters.ParentWindow = _airWindow;
             _parameters.WindowName = "AIRNativeStageWindow";
             _parameters.WindowStyle = _visible
@@ -173,7 +174,7 @@ namespace TuaRua.AIRNative {
             return FREObject.Zero;
         }
 
-        private static void SetViewPort(Rectangle rect) {
+        private static void SetViewPort(Rect rect) {
             var tmpX = rect.X;
             var tmpY = rect.Y;
             var tmpWidth = rect.Width;
@@ -212,8 +213,8 @@ namespace TuaRua.AIRNative {
             if (!updateX && !updateY) {
                 flgs |= WindowPositionFlags.SWP_NOMOVE;
             }
-            WinApi.SetWindowPos(_childWindow, new Hwnd(0), _viewPort.X, _viewPort.Y, _viewPort.Width, _viewPort.Height,
-                flgs);
+            WinApi.SetWindowPos(_childWindow, new Hwnd(0), Convert.ToInt32(_viewPort.X), Convert.ToInt32(_viewPort.Y),
+                Convert.ToInt32(_viewPort.Width), Convert.ToInt32(_viewPort.Height), flgs);
             WinApi.UpdateWindow(_childWindow);
         }
 
