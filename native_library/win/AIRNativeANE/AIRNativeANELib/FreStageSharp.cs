@@ -185,22 +185,22 @@ namespace TuaRua.AIRNative {
             var updateX = false;
             var updateY = false;
 
-            if (tmpWidth != _viewPort.Width) {
+            if (Convert.ToInt32(tmpWidth) != Convert.ToInt32(_viewPort.Width)) {
                 _viewPort.Width = tmpWidth;
                 updateWidth = true;
             }
 
-            if (tmpHeight != _viewPort.Height) {
+            if (Convert.ToInt32(tmpHeight) != Convert.ToInt32(_viewPort.Height)) {
                 _viewPort.Height = tmpHeight;
                 updateHeight = true;
             }
 
-            if (tmpX != _viewPort.X) {
+            if (Convert.ToInt32(tmpX) != Convert.ToInt32(_viewPort.X)) {
                 _viewPort.X = tmpX;
                 updateX = true;
             }
 
-            if (tmpY != _viewPort.Y) {
+            if (Convert.ToInt32(tmpY) != Convert.ToInt32(_viewPort.Y)) {
                 _viewPort.Y = tmpY;
                 updateY = true;
             }

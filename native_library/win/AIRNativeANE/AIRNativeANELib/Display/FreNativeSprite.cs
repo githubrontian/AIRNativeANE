@@ -7,17 +7,16 @@ using FREObject = System.IntPtr;
 
 namespace TuaRua.AIRNative.Display {
     internal class FreNativeSprite : Canvas {
-        public FreNativeSprite(FreObjectSharp freObjectSharp) {
+        public FreNativeSprite(FREObject freObject) {
             HorizontalAlignment = HorizontalAlignment.Left;
             VerticalAlignment = VerticalAlignment.Top;
 
-            X = Convert.ToDouble(freObjectSharp.GetProperty("x").Value);
-            Y = Convert.ToDouble(freObjectSharp.GetProperty("y").Value);
-            Visibility = Convert.ToBoolean(freObjectSharp.GetProperty("visible").Value)
-                ? Visibility.Visible
-                : Visibility.Hidden;
+            X = freObject.GetProp("x").AsDouble();
+            Y = freObject.GetProp("y").AsDouble();
+
+            Visibility = freObject.GetProp("visible").AsBool() ? Visibility.Visible : Visibility.Hidden;
             RenderTransform = new TranslateTransform(X, Y);
-            Opacity = Convert.ToDouble(freObjectSharp.GetProperty("alpha").Value);
+            Opacity = freObject.GetProp("alpha").AsDouble();
         }
 
         /// <summary>
@@ -39,22 +38,20 @@ namespace TuaRua.AIRNative.Display {
         }
 
         public void Update(FREObject prop, FREObject value) {
-            var propName = Convert.ToString(new FreObjectSharp(prop).Value);
+            var propName = prop.AsString();
             if (propName == "x") {
-                X = Convert.ToDouble(new FreObjectSharp(value).Value);
+                X = value.GetProp("x").AsDouble();
                 RenderTransform = new TranslateTransform(X, Y);
             }
             else if (propName == "y") {
-                Y = Convert.ToDouble(new FreObjectSharp(value).Value);
+                X = value.GetProp("y").AsDouble();
                 RenderTransform = new TranslateTransform(X, Y);
             }
             else if (propName == "alpha") {
-                Opacity = Convert.ToDouble(new FreObjectSharp(value).Value);
+                Opacity = value.GetProp("alpha").AsDouble();
             }
             else if (propName == "visible") {
-                Visibility = Convert.ToBoolean(new FreObjectSharp(value).Value)
-                    ? Visibility.Visible
-                    : Visibility.Hidden;
+                Visibility = value.GetProp("visible").AsBool() ? Visibility.Visible : Visibility.Hidden;
             }
         }
     }

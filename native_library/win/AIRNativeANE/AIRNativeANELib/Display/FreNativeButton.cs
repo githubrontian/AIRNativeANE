@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -41,18 +40,18 @@ namespace TuaRua.AIRNative.Display {
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="freObjectSharp"></param>
+        /// <param name="freObject"></param>
         /// <param name="id"></param>
         /// <param name="ctx"></param>
-        public FreNativeButton(FreObjectSharp freObjectSharp, string id, ref FREContext ctx) {
+        public FreNativeButton(FREObject freObject, string id, ref FREContext ctx) {
             _ctx = ctx;
             _upState = BitmapUtils.BitmapToSource(
-                new FreBitmapDataSharp(freObjectSharp.GetProperty("upStateData").RawValue).GetAsBitmap());
+                new FreBitmapDataSharp(freObject.GetProp("upStateData")).GetAsBitmap());
             _overState =
-                BitmapUtils.BitmapToSource(new FreBitmapDataSharp(freObjectSharp.GetProperty("overStateData").RawValue)
+                BitmapUtils.BitmapToSource(new FreBitmapDataSharp(freObject.GetProp("overStateData"))
                     .GetAsBitmap());
             _downState =
-                BitmapUtils.BitmapToSource(new FreBitmapDataSharp(freObjectSharp.GetProperty("downStateData").RawValue)
+                BitmapUtils.BitmapToSource(new FreBitmapDataSharp(freObject.GetProp("downStateData"))
                     .GetAsBitmap());
             _id = id;
 
@@ -66,13 +65,11 @@ namespace TuaRua.AIRNative.Display {
             MouseDown += Button_MouseDown;
             MouseUp += Button_MouseUp;
 
-            X = Convert.ToDouble(freObjectSharp.GetProperty("x").Value);
-            Y = Convert.ToDouble(freObjectSharp.GetProperty("y").Value);
-            Visibility = Convert.ToBoolean(freObjectSharp.GetProperty("visible").Value)
-                ? Visibility.Visible
-                : Visibility.Hidden;
+            X = freObject.GetProp("x").AsDouble();
+            Y = freObject.GetProp("y").AsDouble();
+            Visibility = freObject.GetProp("visible").AsBool() ? Visibility.Visible : Visibility.Hidden;
             RenderTransform = new TranslateTransform(X, Y);
-            Opacity = Convert.ToDouble(freObjectSharp.GetProperty("alpha").Value);
+            Opacity = freObject.GetProp("alpha").AsDouble();
         }
 
         private void Button_MouseUp(object sender, MouseButtonEventArgs e) {
@@ -111,22 +108,21 @@ namespace TuaRua.AIRNative.Display {
         /// <param name="prop"></param>
         /// <param name="value"></param>
         public void Update(FREObject prop, FREObject value) {
-            var propName = Convert.ToString(new FreObjectSharp(prop).Value);
+            var propName = prop.AsString();
+
             if (propName == "x") {
-                X = Convert.ToDouble(new FreObjectSharp(value).Value);
+                X = value.GetProp("x").AsDouble();
                 RenderTransform = new TranslateTransform(X, Y);
             }
             else if (propName == "y") {
-                Y = Convert.ToDouble(new FreObjectSharp(value).Value);
+                X = value.GetProp("y").AsDouble();
                 RenderTransform = new TranslateTransform(X, Y);
             }
             else if (propName == "alpha") {
-                Opacity = Convert.ToDouble(new FreObjectSharp(value).Value);
+                Opacity = value.GetProp("alpha").AsDouble();
             }
             else if (propName == "visible") {
-                Visibility = Convert.ToBoolean(new FreObjectSharp(value).Value)
-                    ? Visibility.Visible
-                    : Visibility.Hidden;
+                Visibility = value.GetProp("visible").AsBool() ? Visibility.Visible : Visibility.Hidden;
             }
         }
     }

@@ -32,10 +32,10 @@ namespace TuaRua.AIRNative.Internal {
             var inFre1 = argv[1];
             if (inFre1 == FREObject.Zero) return FREObject.Zero;
 
-            var parentId = new FreObjectSharp(inFre0).Value as string;
-            var child = new FreObjectSharp(inFre1);
-            var id = Convert.ToString(child.GetProperty("id").Value);
-            var type = (FreStageSharp.FreNativeType) Convert.ToInt32(child.GetProperty("type").Value);
+            var parentId = inFre0.AsString();
+            var child = inFre1;
+            var id = child.GetProp("id").AsString();
+            var type = (FreStageSharp.FreNativeType) child.GetProp("type").AsInt();
 
             switch (type) {
                 case FreStageSharp.FreNativeType.Image:

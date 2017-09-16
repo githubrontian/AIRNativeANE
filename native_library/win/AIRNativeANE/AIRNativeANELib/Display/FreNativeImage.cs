@@ -56,22 +56,21 @@ namespace TuaRua.AIRNative.Display {
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="freObjectSharp"></param>
-        public FreNativeImage(FreObjectSharp freObjectSharp) {
-            var bitmap = new FreBitmapDataSharp(freObjectSharp.GetProperty("bitmapData").RawValue).GetAsBitmap();
+        /// <param name="freObject"></param>
+        public FreNativeImage(FREObject freObject) {
+            var bitmap = new FreBitmapDataSharp(freObject.GetProp("bitmapData")).GetAsBitmap();
             Width = bitmap.Width;
             Height = bitmap.Height;
             HorizontalAlignment = HorizontalAlignment.Left;
             VerticalAlignment = VerticalAlignment.Top;
             Source = BitmapUtils.BitmapToSource(bitmap);
 
-            X = Convert.ToDouble(freObjectSharp.GetProperty("x").Value);
-            Y = Convert.ToDouble(freObjectSharp.GetProperty("y").Value);
-            Visibility = Convert.ToBoolean(freObjectSharp.GetProperty("visible").Value)
-                ? Visibility.Visible
-                : Visibility.Hidden;
+            X = freObject.GetProp("x").AsDouble();
+            Y = freObject.GetProp("y").AsDouble();
+
+            Visibility = freObject.GetProp("visible").AsBool() ? Visibility.Visible : Visibility.Hidden;
             RenderTransform = new TranslateTransform(X, Y);
-            Opacity = Convert.ToDouble(freObjectSharp.GetProperty("alpha").Value);
+            Opacity = freObject.GetProp("alpha").AsDouble();
         }
     }
 }
