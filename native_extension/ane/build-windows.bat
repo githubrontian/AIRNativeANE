@@ -1,8 +1,8 @@
 REM Get the path to the script and trim to get the directory.
 @echo off
 SET SZIP="C:\Program Files\7-Zip\7z.exe"
-SET AIR_PATH="D:\dev\sdks\AIR\AIRSDK_27\bin\"
-SET AIR_PATH_64="D:\dev\sdks\AIR\AIRSDK_26_64\bin\"
+SET AIR_PATH="D:\dev\sdks\AIR\AIRSDK_28\bin\"
+SET AIR_PATH_64="D:\dev\sdks\AIR\AIRSDK_28_64\bin\"
 
 echo Setting path to current directory to:
 SET pathtome=%~dp0
@@ -51,14 +51,17 @@ copy %pathtome%..\..\native_library\win\%projectName%\x64\Release\%projectName%.
 copy %pathtome%..\..\native_library\win\%projectName%\x86\Release\%cSharpLib%.dll %AIR_PATH%%cSharpLib%.dll
 copy %pathtome%..\..\native_library\win\%projectName%\x86\Release\%cSharpLib%.pdb %AIR_PATH%%cSharpLib%.pdb
 
+
 copy %pathtome%..\..\native_library\win\%projectName%\x64\Release\%cSharpLib%.dll %AIR_PATH_64%%cSharpLib%.dll
 copy %pathtome%..\..\native_library\win\%projectName%\x64\Release\%cSharpLib%.pdb %AIR_PATH_64%%cSharpLib%.pdb
 
 copy %pathtome%..\..\native_library\win\%projectName%\x86\Release\%cSharpLib%.dll %pathtome%..\..\c_sharp_libs_x86\%cSharpLib%.dll
-copy %pathtome%..\..\native_library\win\%projectName%\x86\Release\%cSharpLib%.dll %pathtome%..\..\..\..\..\..\..\..\FreSharp\example\c_sharp_libs_x86\%cSharpLib%.dll
+copy %pathtome%..\..\native_library\win\%projectName%\x86\Release\%cSharpLib%.dll %pathtome%..\..\..\..\..\..\c_sharp_libs_x86\%cSharpLib%.dll
+
+echo "2"
 
 copy %pathtome%..\..\native_library\win\%projectName%\x64\Release\%cSharpLib%.dll %pathtome%..\..\c_sharp_libs_x64\%cSharpLib%.dll
-copy %pathtome%..\..\native_library\win\%projectName%\x64\Release\%cSharpLib%.dll %pathtome%..\..\..\..\..\..\..\..\FreSharp\example\c_sharp_libs_x64\%cSharpLib%.dll
+copy %pathtome%..\..\native_library\win\%projectName%\x64\Release\%cSharpLib%.dll %pathtome%..\..\..\..\..\..\c_sharp_libs_x64\%cSharpLib%.dll
 
 copy %pathtome%..\..\native_library\win\%projectName%\x86\Release\FreSharpCore.dll %AIR_PATH%FreSharpCore.dll
 copy %pathtome%..\..\native_library\win\%projectName%\x86\Release\FreSharpCore.pdb %AIR_PATH%FreSharpCore.pdb

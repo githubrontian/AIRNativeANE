@@ -73,7 +73,6 @@
     <Compile Include="Display\FreNativeImage.cs" />
     <Compile Include="Display\FreNativeSprite.cs" />
     <Compile Include="Internal\FreNativeRoot.cs" />
-    <Compile Include="FreSharpController.cs" />
     <Compile Include="FreStageSharp.cs" />
     <Compile Include="Internal\FreDisplayList.cs" />
     <Compile Include="MainController.cs" />

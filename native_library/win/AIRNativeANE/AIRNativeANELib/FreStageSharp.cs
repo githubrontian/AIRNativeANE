@@ -2,7 +2,6 @@
 using System.Windows.Interop;
 using System.Windows.Media;
 using TuaRua.FreSharp;
-using TuaRua.FreSharp.Geom;
 using TuaRua.FreSharp.Utils;
 using Hwnd = System.IntPtr;
 using FREObject = System.IntPtr;
@@ -54,6 +53,7 @@ namespace TuaRua.AIRNative {
             Sprite
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -71,23 +71,21 @@ namespace TuaRua.AIRNative {
             if (inFre2 == FREObject.Zero) return FREObject.Zero;
             if (inFre3 == FREObject.Zero) return FREObject.Zero;
 
-            var rgb = FreSharpHelper.GetAsUInt(new FreObjectSharp(inFre3).RawValue);
-            BackgroundColor = Color.FromRgb(
-                Convert.ToByte((rgb >> 16) & 0xff),
-                Convert.ToByte((rgb >> 8) & 0xff),
-                Convert.ToByte((rgb >> 0) & 0xff));
+            BackgroundColor = inFre3.AsColor();
 
-            _viewPort = new FreRectangleSharp(inFre0).Value;
-            _visible = Convert.ToBoolean(new FreObjectSharp(inFre1).Value);
-            Transparent = Convert.ToBoolean(new FreObjectSharp(inFre2).Value);
+            _viewPort = inFre0.AsRect();
+            _visible = inFre1.AsBool();
+            Transparent = inFre2.AsBool();
             _airWindow =
                 System.Diagnostics.Process.GetCurrentProcess().MainWindowHandle; //get the reference to the AIR Window
+
 
             _parameters = new HwndSourceParameters();
             _parameters.SetPosition(Convert.ToInt32(_viewPort.X), Convert.ToInt32(_viewPort.Y));
             _parameters.SetSize(Convert.ToInt32(_viewPort.Width), Convert.ToInt32(_viewPort.Height));
             _parameters.ParentWindow = _airWindow;
             _parameters.WindowName = "AIRNativeStageWindow";
+            
             _parameters.WindowStyle = _visible
                 ? (int) (WindowStyles.WS_CHILD | WindowStyles.WS_VISIBLE)
                 : (int) WindowStyles.WS_CHILD;
@@ -118,7 +116,7 @@ namespace TuaRua.AIRNative {
             var source = new HwndSource(_parameters) {RootVisual = _rootView};
             _childWindow = source.Handle;
             WinApi.RegisterTouchWindow(_childWindow, TouchWindowFlags.TWF_WANTPALM);
-            
+
             nativeRoot.Init();
             _isAdded = true;
             return FREObject.Zero;
@@ -147,7 +145,6 @@ namespace TuaRua.AIRNative {
             return FREObject.Zero;
         }
 
-
         /// <summary>
         /// 
         /// </summary>
@@ -162,19 +159,20 @@ namespace TuaRua.AIRNative {
             var inFre1 = argv[1];
             if (inFre1 == FREObject.Zero) return FREObject.Zero;
 
-            var propName = Convert.ToString(new FreObjectSharp(inFre0).Value);
+            var propName = inFre0.AsString();
 
             if (propName == "visible") {
-                SetVisibility(Convert.ToBoolean(new FreObjectSharp(inFre1).Value));
+                SetVisibility(inFre1.AsBool());
             }
             else if (propName == "viewPort") {
-                SetViewPort(new FreRectangleSharp(inFre1).Value);
+                SetViewPort(inFre1.AsRect());
             }
 
             return FREObject.Zero;
         }
 
         private static void SetViewPort(Rect rect) {
+            const double tolerance = 0.000001;
             var tmpX = rect.X;
             var tmpY = rect.Y;
             var tmpWidth = rect.Width;
@@ -185,22 +183,22 @@ namespace TuaRua.AIRNative {
             var updateX = false;
             var updateY = false;
 
-            if (Convert.ToInt32(tmpWidth) != Convert.ToInt32(_viewPort.Width)) {
+            if (Math.Abs(tmpWidth - _viewPort.Width) > tolerance) {
                 _viewPort.Width = tmpWidth;
                 updateWidth = true;
             }
 
-            if (Convert.ToInt32(tmpHeight) != Convert.ToInt32(_viewPort.Height)) {
+            if (Math.Abs(tmpHeight - _viewPort.Height) > tolerance) {
                 _viewPort.Height = tmpHeight;
                 updateHeight = true;
             }
 
-            if (Convert.ToInt32(tmpX) != Convert.ToInt32(_viewPort.X)) {
+            if (Math.Abs(tmpX - _viewPort.X) > tolerance) {
                 _viewPort.X = tmpX;
                 updateX = true;
             }
 
-            if (Convert.ToInt32(tmpY) != Convert.ToInt32(_viewPort.Y)) {
+            if (Math.Abs(tmpY - _viewPort.Y) > tolerance) {
                 _viewPort.Y = tmpY;
                 updateY = true;
             }

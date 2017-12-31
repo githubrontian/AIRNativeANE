@@ -13,8 +13,9 @@ namespace TuaRua.AIRNative.Display {
 
             X = freObject.GetProp("x").AsDouble();
             Y = freObject.GetProp("y").AsDouble();
-
-            Visibility = freObject.GetProp("visible").AsBool() ? Visibility.Visible : Visibility.Hidden;
+            Visibility = freObject.GetProp("visible").AsBool()
+                ? Visibility.Visible
+                : Visibility.Hidden;
             RenderTransform = new TranslateTransform(X, Y);
             Opacity = freObject.GetProp("alpha").AsDouble();
         }
@@ -38,20 +39,22 @@ namespace TuaRua.AIRNative.Display {
         }
 
         public void Update(FREObject prop, FREObject value) {
-            var propName = prop.AsString();
+            var propName = Convert.ToString(new FreObjectSharp(prop).Value);
             if (propName == "x") {
-                X = value.GetProp("x").AsDouble();
+                X = Convert.ToDouble(new FreObjectSharp(value).Value);
                 RenderTransform = new TranslateTransform(X, Y);
             }
             else if (propName == "y") {
-                X = value.GetProp("y").AsDouble();
+                Y = Convert.ToDouble(new FreObjectSharp(value).Value);
                 RenderTransform = new TranslateTransform(X, Y);
             }
             else if (propName == "alpha") {
-                Opacity = value.GetProp("alpha").AsDouble();
+                Opacity = Convert.ToDouble(new FreObjectSharp(value).Value);
             }
             else if (propName == "visible") {
-                Visibility = value.GetProp("visible").AsBool() ? Visibility.Visible : Visibility.Hidden;
+                Visibility = Convert.ToBoolean(new FreObjectSharp(value).Value)
+                    ? Visibility.Visible
+                    : Visibility.Hidden;
             }
         }
     }
